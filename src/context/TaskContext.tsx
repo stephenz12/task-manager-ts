@@ -3,15 +3,22 @@ import { Task } from "../types/Task";
 
 interface TaskContextType {
   tasks: Task[];
+  addTask: (task: Task) => void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
 export function TaskProvider({ children }: { children: ReactNode }) {
-  const [tasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  const addTask = (task: Task) => {
+    setTasks((prev) => [...prev, task]);
+  };
 
   return (
-    <TaskContext.Provider value={{ tasks }}>{children}</TaskContext.Provider>
+    <TaskContext.Provider value={{ tasks, addTask }}>
+      {children}
+    </TaskContext.Provider>
   );
 }
 
