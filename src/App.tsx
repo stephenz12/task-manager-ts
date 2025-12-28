@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { Task } from "./types/Task";
+import { useTasks } from "./context/TaskContext";
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const { tasks } = useTasks();
 
   return (
     <div>
